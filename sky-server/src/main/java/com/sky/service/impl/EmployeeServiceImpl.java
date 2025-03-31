@@ -111,4 +111,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,records);//调用PageResult的有参构造方法
     }
 
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        //update employee set status = ? where id = ?
+        Employee employee =Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.update(employee);//利用Mapper映射一劳永逸，实现多参数传递的动态更新语句
+    }
+
 }
